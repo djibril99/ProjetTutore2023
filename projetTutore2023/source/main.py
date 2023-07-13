@@ -2,8 +2,8 @@
 import streamlit as st
 import pandas as pd
 
-from .model.DataReader import DataReader
-from .model.CryptoModel import CryptoModel
+from source.model.DataReader import DataReader
+from source.model.CryptoModel import CryptoModel
 
 
 ###########################################
