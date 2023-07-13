@@ -1,7 +1,11 @@
 class CryptoModel:
         def __init__(self) :
+<<<<<<< HEAD
                 #declarrer les attributs de l'objet dont on aura besoin
                 #ces derniers doivent etre les memes que les cles du dictionnaire json recupere depuis l'api 
+=======
+                #declarrer les attributs de l'objet dont on aura besoin  
+>>>>>>> d6fe7d235655a2a09e9e729c57155efbeff72f6e
                 
                 self.price = 0
                 self.name = ''
@@ -10,7 +14,12 @@ class CryptoModel:
                 self.cmc_rank = 0
                 self.num_market_pairs = 0
                 
+<<<<<<< HEAD
                       
+=======
+                             
+                pass
+>>>>>>> d6fe7d235655a2a09e9e729c57155efbeff72f6e
         def load(self, data):
                 #charger les donnees dans l'objet
                 #data est un dictionnaire et les cles sont les noms des attributs
@@ -29,6 +38,7 @@ class CryptoModel:
                         #verifier si l'attribut existe
                         if hasattr(self, key):
                                 setattr(self,key,value)
+<<<<<<< HEAD
                                 
         
         #methode de classe pour convertir les donnees en format json pour pouvoir les afficher dans un dataframe correctement
@@ -49,6 +59,8 @@ class CryptoModel:
                                 data_json[key].append(dict_crupto[key])
                 
                 return data_json
+=======
+>>>>>>> d6fe7d235655a2a09e9e729c57155efbeff72f6e
         
         
         
