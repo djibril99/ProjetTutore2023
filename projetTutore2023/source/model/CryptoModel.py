@@ -3,23 +3,20 @@ class CryptoModel:
 
                 #declarrer les attributs de l'objet dont on aura besoin
                 #ces derniers doivent etre les memes que les cles du dictionnaire json recupere depuis l'api 
-
                 #declarrer les attributs de l'objet dont on aura besoin  
-
-                
                 self.price = 0
                 self.name = ''
                 self.symbol = ''
                 self.slug = ''
                 self.cmc_rank = 0
                 self.num_market_pairs = 0
-                
-                      
+      
         def load(self, data):
                 #charger les donnees dans l'objet
                 #data est un dictionnaire et les cles sont les noms des attributs
                 # pour traduis ls donnees de cette objet en format json on utilise la fonction dumps de json sur l'objet en question
-                
+                if not isinstance(data, dict):
+                        return
                 #pour traduire les donne
                 for key, value in data.items():
                         self.charge(key, value)
@@ -39,7 +36,6 @@ class CryptoModel:
         def data_array_to_json(tableau_donnee:list):
                 data_json = {}
                 #recuperer les attritus de la classe CryptoModel et les ajouter dans le dictionnaire comme des cles 
-                #
                 listeKeys = [key for key in CryptoModel().__dict__]
                 
                 #creer une liste vide pour chaque cle , la cle represente le nom de la colonne et la liste represente les donnees de la colonne
@@ -53,10 +49,6 @@ class CryptoModel:
                                 data_json[key].append(dict_crupto[key])
                 
                 return data_json
-        
-        
-        
-        
         
                 """
                  {

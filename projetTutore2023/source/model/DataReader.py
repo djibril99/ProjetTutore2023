@@ -1,6 +1,6 @@
 #recuperer les donnees depuis un lien
 
-from source.code.CryptoModel import CryptoModel
+from .CryptoModel import CryptoModel
 
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
