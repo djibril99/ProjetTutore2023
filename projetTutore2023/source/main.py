@@ -18,4 +18,4 @@ else:
         df = pd.DataFrame(CryptoModel.data_array_to_json(liste_data))
         
         x=st.dataframe(df)
-        print(liste_data[1].__dict__['percent_change_1h'])
+        print(type(liste_data[1].__dict__['percent_change_1h']))

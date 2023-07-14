@@ -47,9 +47,9 @@ class CryptoModel:
                         
                 #ajouter les donnees de chaque colonne du tableau 
                 for crypto_data in tableau_donnee:
-                        dict_cripto = crypto_data.__dict__
+                        dict_crypto = crypto_data.__dict__
                         for key in listeKeys:
-                                data_json[key].append(dict_cripto[key])
+                                data_json[key].append(dict_crypto[key])
                 
                 return data_json
         
