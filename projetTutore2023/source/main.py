@@ -4,6 +4,7 @@ import pandas as pd
 
 from model.DataReader import DataReader
 from model.CryptoModel import CryptoModel
+import matplotlib.pyplot as plt
 #recuperer les donnees depuis du lien
 
 data_reader = DataReader()
@@ -17,4 +18,4 @@ else:
         df = pd.DataFrame(CryptoModel.data_array_to_json(liste_data))
         
         x=st.dataframe(df)
-        print(x)
+        print(liste_data[1].__dict__['percent_change_1h'])
