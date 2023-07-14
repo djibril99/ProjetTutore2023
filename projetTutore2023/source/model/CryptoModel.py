@@ -12,6 +12,8 @@ class CryptoModel:
                 self.num_market_pairs = 0
                 self.volume_24h = 0
                 self.percent_change_1h = 0
+                self.percent_change_24h = 0
+                self.percent_change_7d = 0
       
         def load(self, data):
                 #charger les donnees dans l'objet
