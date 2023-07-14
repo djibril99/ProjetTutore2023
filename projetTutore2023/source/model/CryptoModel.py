@@ -7,9 +7,11 @@ class CryptoModel:
                 self.price = 0
                 self.name = ''
                 self.symbol = ''
-                self.slug = ''
+                # self.slug = ''
                 self.cmc_rank = 0
                 self.num_market_pairs = 0
+                self.volume_24h = 0
+                self.percent_change_1h = 0
       
         def load(self, data):
                 #charger les donnees dans l'objet
@@ -33,7 +35,8 @@ class CryptoModel:
                                 
         
         #methode de classe pour convertir les donnees en format json pour pouvoir les afficher dans un dataframe correctement
-        def data_array_to_json(tableau_donnee:list):
+        @classmethod
+        def data_array_to_json(cls, tableau_donnee:list):
                 data_json = {}
                 #recuperer les attritus de la classe CryptoModel et les ajouter dans le dictionnaire comme des cles 
                 listeKeys = [key for key in CryptoModel().__dict__]

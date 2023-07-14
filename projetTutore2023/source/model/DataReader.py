@@ -8,9 +8,9 @@ import json
 
 
 class DataReader :
-        def __init__(self , lien:str, API_KEY):
-                self._url = lien
-                self._API_KEY = API_KEY
+        def __init__(self):
+                self._url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+                self._API_KEY = 'ded5b890-0e71-41e4-b097-a3e73ec43f99'
                 self.parameters = {
                         'start': '1',
                         'limit': '5',
@@ -18,7 +18,7 @@ class DataReader :
                 }
                 self.headers = {
                         'Accepts': 'application/json',
-                        'X-CMC_PRO_API_KEY': API_KEY
+                        'X-CMC_PRO_API_KEY': self._API_KEY
                 }
                 
         def get_data(self):
