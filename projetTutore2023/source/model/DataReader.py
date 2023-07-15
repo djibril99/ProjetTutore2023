@@ -13,8 +13,9 @@ class DataReader :
                 self._API_KEY = 'ded5b890-0e71-41e4-b097-a3e73ec43f99'
                 self.parameters = {
                         'start': '1',
-                        'limit': '5',
-                        'convert': 'USD'
+                        'limit': '20',# bon j'ai augmenté
+                        'convert': 'USD',
+                        
                 }
                 self.headers = {
                         'Accepts': 'application/json',
