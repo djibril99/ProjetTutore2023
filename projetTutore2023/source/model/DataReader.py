@@ -1,7 +1,7 @@
 #recuperer les donnees depuis un lien
 
-from .CryptoModel import CryptoModel
 
+from model.CryptoModel import CryptoModel 
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
@@ -36,6 +36,7 @@ class DataReader :
                                 listeCrypto.append(crypto)
                 except Exception as e:
                         return listeCrypto
+                
                 
                 return listeCrypto
 
