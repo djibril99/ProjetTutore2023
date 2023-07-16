@@ -1,7 +1,7 @@
 #recuperer les donnees depuis un lien
 
-from .CryptoModel import CryptoModel
 
+from model.CryptoModel import CryptoModel 
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
@@ -13,8 +13,9 @@ class DataReader :
                 self._API_KEY = 'ded5b890-0e71-41e4-b097-a3e73ec43f99'
                 self.parameters = {
                         'start': '1',
-                        'limit': '5',
-                        'convert': 'USD'
+                        'limit': '20',
+                        'convert': 'USD',
+                        
                 }
                 self.headers = {
                         'Accepts': 'application/json',
@@ -22,20 +23,18 @@ class DataReader :
                 }
                 
         def get_data(self):
-                
                 session = Session()
                 session.headers.update(self.headers)
-                listeCrypto = []
+                crypto_dict = {}
+
                 try:
                         response = session.get(self._url, params=self.parameters)
                         data = json.loads(response.text)
                         for crypto_json in data['data']:
                                 crypto = CryptoModel()
                                 crypto.load(crypto_json)
-                                
-                                listeCrypto.append(crypto)
+                                crypto_dict[crypto.name] = crypto  # Ajouter la cryptomonnaie au dictionnaire en utilisant son nom comme clé
                 except Exception as e:
-                        return listeCrypto
-                
-                return listeCrypto
+                        return list(crypto_dict.values()) 
 
+                return list(crypto_dict.values())  # Retourner la liste des cryptomonnaies

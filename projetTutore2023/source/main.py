@@ -1,36 +1,31 @@
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
 from model.DataReader import DataReader
-from model.CryptoModel import CryptoModel
+from view.AfficherCrypto import afficher_crypto_info
+
+# Ajouter un titre à l'application
+st.title("Bienvenue sur Crypto4Fantastic")
 
 # Récupérer les données depuis le lien
 data_reader = DataReader()
 liste_data = data_reader.get_data()
 
-if len(liste_data) == 0:
-    st.error('Error while loading data')
-    st.stop()
-else:
-    df = pd.DataFrame(CryptoModel.data_array_to_json(liste_data))
 
-    # Afficher les informations de chaque crypto sur une seule ligne avec un en-tête
-    for index, row in df.iterrows():
-        expander = st.expander(f'{row["name"]} ({row["symbol"]})')
-        with expander:
-            st.write(f'Price: {row["price"]}')
-            st.write(f'CMC Rank: {row["cmc_rank"]}')
-            st.write(f'Num Market Pairs: {row["num_market_pairs"]}')
-            st.write(f'Volume 24h: {row["volume_24h"]}')
-            st.write(f'Percent Change 1h: {row["percent_change_1h"]}')
-            
-            # Créer un graphe spécifique à la crypto-monnaie
-            fig, ax = plt.subplots()
-            ax.plot(["1h", "24h", "7 jours"], [row["percent_change_1h"], row["percent_change_24h"], row["percent_change_7d"]])
-            ax.set_xlabel('Variation')
-            ax.set_ylabel('Temps')
-            ax.set_title('Variations de la crypto-monnaie')
-            for i, value in enumerate([row["percent_change_1h"], row["percent_change_24h"], row["percent_change_7d"]]):
-                rounded_value = round(value, 2)  # Arrondir à deux chiffres après la virgule
-                plt.text(i, value, f"{rounded_value}", color='red', ha='left', va='top')
-            st.pyplot(fig)
+
+# Afficher un message d'erreur si les données n'ont pas été récupérées
+
+
+if len(liste_data) == 0:
+        st.error('Error while loading data')
+        st.stop()
+else:
+        # Affiche le message  au-dessus du select
+        st.subheader('Veuillez choisir une crypto-monnaie')
+
+        # Créer une liste déroulante pour sélectionner la crypto-monnaie de notre choix 
+        crypto_names = [crypto.name for crypto in liste_data]
+        selected_crypto= st.multiselect('Sélectionner une crypto-monnaie', crypto_names)
+
+        # Afficher le bouton "Valider"
+        if st.button('Valider', type='primary'):
+                # Redirection vers la page d'affichage de la crypto-monnaie sélectionnée
+                afficher_crypto_info(selected_crypto, liste_data)
