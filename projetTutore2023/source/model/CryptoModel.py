@@ -12,7 +12,8 @@ class CryptoModel:
                 self.num_market_pairs = 0
                 self.volume_24h = 0
                 self.percent_change_1h = 0
-      
+                self.last_updated = ''
+                
         def load(self, data):
                 #charger les donnees dans l'objet
                 #data est un dictionnaire et les cles sont les noms des attributs

@@ -1,21 +1,12 @@
-#code principale
 import streamlit as st
-import pandas as pd
+from model.views import DataVisualizer
 
-from model.DataReader import DataReader
-from model.CryptoModel import CryptoModel
-import matplotlib.pyplot as plt
-#recuperer les donnees depuis du lien
+def main():
+    # Create an instance of the DataVisualizer class
+    visualizer = DataVisualizer()
+    
+    # Run the data visualization
+    visualizer.run()
 
-data_reader = DataReader()
-#recuperer la liste des donnees (liste de CryptoModel) depuis le lien de l'API
-liste_data = data_reader.get_data()
-                                      
-if len(liste_data) == 0:
-        st.error('Error while loading data')
-        st.stop()
-else:
-        df = pd.DataFrame(CryptoModel.data_array_to_json(liste_data))
-        
-        x=st.dataframe(df)
-        print(type(liste_data[1].__dict__['percent_change_1h']))
+if __name__ == '__main__':
+    main()
