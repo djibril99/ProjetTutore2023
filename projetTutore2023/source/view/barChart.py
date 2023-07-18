@@ -70,7 +70,12 @@ class BarChart:
             st.markdown(f'''
                         <div style="elevation:16px; box-shadow: 0 0 7px; padding: 10px; border-radius: 10px; background-color: #ffffff;">
                             <div style="background-color: rgb(234, 244, 250 ) ; border-radius: 2px; padding: 10px;">
-                                <center><h3 style="font-family: 'Times New Roman', Times, serif; color: #21618C;">{crypto_data.name}</h3></center>
+                                <center>
+                                <h3 style="font-family: 'Times New Roman', Times, serif; color: #21618C;">
+                                <img src="https://coinicons-api.vercel.app/api/icon/{crypto_data.symbol.lower()}" alt="{crypto_data.name}" width="33" height="33">
+                                {crypto_data.name}
+                                </h3>
+                                </center>
                             </div>
                             <p> <span class="cle">Prix :</span> <span class="valeur">{round(crypto_data.price,2)} USD</span> </p>
                             <p> <span class="cle">Rang CMC :</span> <span class="valeur">{crypto_data.cmc_rank}</span></p>

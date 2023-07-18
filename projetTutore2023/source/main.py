@@ -1,6 +1,6 @@
 import streamlit as st
-from source.model.DataReader import DataReader
-from source.view.barChart import BarChart
+from model.DataReader import DataReader
+from view.barChart import BarChart
 
 # Ajouter un titre à l'application
 st.title("Bienvenue sur Crypto4Fantastic")
