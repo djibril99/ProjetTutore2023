@@ -4,6 +4,8 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 from requests_cache import CachedSession
 
+
+# IF BUGS INSTALL THIS : pip install requests-cache
 class DataReader:
     def __init__(self):
         self._url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
@@ -33,5 +35,5 @@ class DataReader:
                     crypto_dict[crypto.name] = crypto
             except Exception as e:
                 return list(crypto_dict.values())
-
+            
             return list(crypto_dict.values())
