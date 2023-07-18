@@ -1,9 +1,70 @@
 import streamlit as st
 from model.DataReader import DataReader
 from view.barChart import BarChart
+import base64
 
 # Ajouter un titre à l'application
-st.title("Bienvenue sur Crypto4Fantastic")
+def get_img_as_base64(file):
+        with open(file, "rb") as f:
+                data = f. read ( )
+        return base64.b64encode (data) . decode ()
+img = get_img_as_base64 ("art3.jpeg")
+
+st.markdown(f'''
+    <style>
+      .diva1 {{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        background-color: #2f3131ba;
+        margin-bottom: 15px;
+        border: none;  /* Remove border */
+      }}
+      .animated-text {{
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.5em;
+        display: inline-block;
+        padding: 1.5em 0em;
+        font-weight: bolder;
+        width: 50em;
+        border: none;  /* Remove border */
+      }}
+      .spans {{
+        font: 700 2em/1 "Oswald", sans-serif;
+        letter-spacing: 0;
+        display: block;
+        text-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+        background: url("data:image/png;base64,{img}") repeat-y;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-animation: aitf 38s linear infinite;
+        -webkit-transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+      }}
+      /* Animate Background Image */
+      @-webkit-keyframes aitf {{
+        0% {{
+          background-position: 0% 50%;
+        }}
+        100% {{
+          background-position: 100% 50%;
+        }}
+      }}
+    </style>
+
+    <div class="diva1 ">
+      <p class="animated-text ">
+        <span class="spans">
+          Bienvenue sur Crypto4Fantastic
+        </span>
+      </p>
+    </div> 
+''', unsafe_allow_html=True)
 
 # Récupérer les données depuis le lien
 data_reader = DataReader()
