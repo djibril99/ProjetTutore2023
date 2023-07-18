@@ -39,19 +39,43 @@ class BarChart:
 
         # Chercher la crypto-monnaie sélectionnée dans la liste de données
         selected_crypto_data = [crypto for crypto in self.liste_cripto if crypto.name in selected_crypto_name]
-
-        if not selected_crypto_data:
-            st.warning("Aucune crypto-monnaie correspondante trouvée")
-            return
+        st.markdown(f'''<style>
+                        .cle {{
+                            font-weight: bold;
+                            font-size: 20px;
+                            font-family: "Times New Roman", Times, serif;
+                        }}
+                        .valeur {{
+                            font-size: 20px;
+                            font-family: "Times New Roman", Times, serif;
+                            font-style: italic;
+                            color: #00a800;
+                            }}
+                        </style>
+                        ''', unsafe_allow_html=True)
 
         # Utiliser la classe BarChart pour afficher le graphique de variation de la crypto sélectionnée
         for crypto_data in selected_crypto_data:
             # Afficher les informations de la crypto sélectionnée
+            """
             st.write('Nom :', crypto_data.name)
             st.write('Prix :', crypto_data.price)
             st.write('Rang CMC :', crypto_data.cmc_rank)
             st.write('Nombre de paires de marché :', crypto_data.num_market_pairs)
             st.write('Volume 24h :', crypto_data.volume_24h)
+            """
+            #affichage avec html/css
+            st.markdown(f'''
+                        <div style="elevation:16px; box-shadow: 0 0 7px; padding: 10px; border-radius: 10px; background-color: #ffffff;">
+                            <center><h3 style="font-family: 'Times New Roman', Times, serif; color: #00a800;">{crypto_data.name}</h3></center>
+                            <p> <span class="cle">Prix :</span> <span class="valeur">{round(crypto_data.price,2)} USD</span> </p>
+                            <p> <span class="cle">Rang CMC :</span> <span class="valeur">{crypto_data.cmc_rank}</span></p>
+                            <p> <span class="cle">Nombre de paires de marché :</span> <span class="valeur">{crypto_data.num_market_pairs}</span></p>
+                            <p> <span class="cle">Volume 24h :</span> <span class="valeur">{crypto_data.volume_24h}</span></p>
+                        </div>
+                        ''', unsafe_allow_html=True)
+            
+            
              # Ajouter si vous le souhaitez...
             Variation_fig = self._plot_crypto_variation(crypto_data)
 
@@ -60,4 +84,7 @@ class BarChart:
 
             # Fermer la figure pour libérer la mémoire
             plt.close(Variation_fig)
+            st.markdown("""
+                        <hr style="height:1.5px;border-width:0;color:black;background-color:black">
+                        """, unsafe_allow_html=True)
 
