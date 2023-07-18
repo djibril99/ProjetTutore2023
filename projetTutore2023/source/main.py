@@ -12,6 +12,7 @@ liste_data = data_reader.get_data()
 
 
 # Afficher un message d'erreur si les données n'ont pas été récupérées
+            
 
 if len(liste_data) == 0:
         st.error('Error while loading data')
