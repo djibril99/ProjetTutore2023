@@ -1,6 +1,6 @@
 import streamlit as st
-from model.DataReader import DataReader
-from view.AfficherCrypto import afficher_crypto_info
+from source.model.DataReader import DataReader
+from source.view.barChart import BarChart
 
 # Ajouter un titre à l'application
 st.title("Bienvenue sur Crypto4Fantastic")
@@ -26,6 +26,7 @@ else:
         selected_crypto= st.multiselect('Sélectionner une crypto-monnaie', crypto_names)
 
         # Afficher le bouton "Valider"
-        if st.button('Valider', type='primary'):
+        if st.button('Valider'):
                 # Redirection vers la page d'affichage de la crypto-monnaie sélectionnée
-                afficher_crypto_info(selected_crypto, liste_data)
+                barChart =  BarChart(liste_data)
+                barChart.afficher_crypto_info(selected_crypto)

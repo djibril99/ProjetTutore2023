@@ -25,11 +25,11 @@ class CryptoModel:
                 #self.timestamp = data['timestamp']
                 #pour traduire les donne
                 for key, value in data.items():
-                        self.charge(key, value)
+                        self._charge(key, value)
                         
         
         #utiliser la recursivité pour charger les donnees de l'objet
-        def charge(self,key , value):
+        def _charge(self,key , value):
                 #verifier si c est un dict
                 if isinstance(value, dict):
                         self.load(value)
@@ -103,7 +103,5 @@ class CryptoModel:
                     "fully_diluted_market_cap": 952835089431.14,
                     "last_updated": "2018-08-09T22:53:32.000Z"
                 }
-            }
-        },
                 """
         

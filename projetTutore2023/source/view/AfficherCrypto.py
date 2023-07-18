@@ -1,6 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
-from view.barChart import BarChart
+from .barChart import BarChart
 
 def afficher_crypto_info(selected_crypto_name, liste_data):
     if not selected_crypto_name:
