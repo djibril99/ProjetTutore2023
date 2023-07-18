@@ -45,6 +45,7 @@ class BarChart:
                             font-weight: bold;
                             font-size: 20px;
                             font-family: "Times New Roman", Times, serif;
+                            color:#000000;
                         }}
                         .valeur {{
                             font-size: 20px;
