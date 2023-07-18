@@ -39,6 +39,7 @@ class BarChart:
 
         # Chercher la crypto-monnaie sélectionnée dans la liste de données
         selected_crypto_data = [crypto for crypto in self.liste_cripto if crypto.name in selected_crypto_name]
+        #style pour le texte
         st.markdown(f'''<style>
                         .cle {{
                             font-weight: bold;
@@ -67,7 +68,9 @@ class BarChart:
             #affichage avec html/css
             st.markdown(f'''
                         <div style="elevation:16px; box-shadow: 0 0 7px; padding: 10px; border-radius: 10px; background-color: #ffffff;">
-                            <center><h3 style="font-family: 'Times New Roman', Times, serif; color: #00a800;">{crypto_data.name}</h3></center>
+                            <div style="background-color: rgb(234, 244, 250 ) ; border-radius: 2px; padding: 10px;">
+                                <center><h3 style="font-family: 'Times New Roman', Times, serif; color: #21618C;">{crypto_data.name}</h3></center>
+                            </div>
                             <p> <span class="cle">Prix :</span> <span class="valeur">{round(crypto_data.price,2)} USD</span> </p>
                             <p> <span class="cle">Rang CMC :</span> <span class="valeur">{crypto_data.cmc_rank}</span></p>
                             <p> <span class="cle">Nombre de paires de marché :</span> <span class="valeur">{crypto_data.num_market_pairs}</span></p>
@@ -84,6 +87,8 @@ class BarChart:
 
             # Fermer la figure pour libérer la mémoire
             plt.close(Variation_fig)
+            
+            #ligne de séparation
             st.markdown("""
                         <hr style="height:1.5px;border-width:0;color:black;background-color:black">
                         """, unsafe_allow_html=True)
