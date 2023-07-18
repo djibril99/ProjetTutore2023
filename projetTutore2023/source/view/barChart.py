@@ -68,7 +68,7 @@ class BarChart:
             """
             #affichage avec html/css
             st.markdown(f'''
-                        <div style="elevation:16px; box-shadow: 0 0 7px; padding: 10px; border-radius: 10px; background-color: #ffffff;">
+                        <div style="elevation:16px; box-shadow: 0 0 7px; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: #ffffff;">
                             <div style="background-color: rgb(234, 244, 250 ) ; border-radius: 2px; padding: 10px;">
                                 <center>
                                 <h3 style="font-family: 'Times New Roman', Times, serif; color: #21618C;">
