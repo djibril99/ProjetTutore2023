@@ -1,7 +1,7 @@
 import streamlit as st
-from source.model.DataReader import DataReader
-from source.view.barChart import BarChart
-from source.model.DataReader import DataReader
+from model.DataReader import DataReader
+from view.barChart import BarChart
+from model.DataReader import DataReader
 import base64
 
 # Ajouter un titre à l'application
@@ -9,7 +9,7 @@ def get_img_as_base64(file):
         with open(file, "rb") as f:
                 data = f. read ( )
         return base64.b64encode (data) . decode ()
-img = get_img_as_base64 ("projetTutore2023\\source\\art3.jpeg")
+img = get_img_as_base64 ("../source/art3.jpeg")
 
 st.markdown(f'''
     <style>
