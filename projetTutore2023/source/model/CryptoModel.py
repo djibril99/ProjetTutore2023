@@ -17,7 +17,7 @@ class CryptoModel:
                 
       
         def load(self, data):
-                #charger les donnees dans l'objet
+                #hydrater l'objet avec les donnees recuperees depuis l'api
                 #data est un dictionnaire et les cles sont les noms des attributs
                 # pour traduis ls donnees de cette objet en format json on utilise la fonction dumps de json sur l'objet en question
                 if not isinstance(data, dict):

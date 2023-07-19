@@ -70,10 +70,6 @@ st.markdown(f'''
 # Récupérer les données depuis le lien
 data_reader = DataReader()
 liste_data = data_reader.get_data()
-#create a dataframe
-
-
-
 
 # Afficher un message d'erreur si les données n'ont pas été récupérées
             
@@ -87,18 +83,12 @@ else:
 
         # Créer une liste déroulante pour sélectionner la crypto-monnaie de notre choix 
         crypto_names = [crypto.name for crypto in liste_data]
-        selected_crypto= st.multiselect('Sélectionner une crypto-monnaie', crypto_names)
+        selected_crypto= st.multiselect('Sélectionner au moins une crypto-monnaie', crypto_names)
         
         col1 , col2, col3 = st.columns(3)
         with col2 :
                 # Afficher le bouton "Valider"
                 bnt_click = st.button('Valider')
-                        # Redirection vers la page d'affichage de la crypto-monnaie sélectionnée
         if bnt_click:
                 barChart =  BarChart(liste_data)
                 barChart.afficher_crypto_info(selected_crypto)
-        """
-        else :
-              barChart =  BarChart(liste_data)
-              barChart.afficher_courbe_comparative()
-        """

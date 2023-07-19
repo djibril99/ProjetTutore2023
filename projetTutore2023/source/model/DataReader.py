@@ -28,11 +28,13 @@ class DataReader:
 
             try:
                 response = session.get(self._url, params=self.parameters)
+                print(response.text)
                 data = json.loads(response.text)
                 for crypto_json in data['data']:
                     crypto = CryptoModel()
                     crypto.load(crypto_json)
-                    crypto_dict[crypto.name] = crypto
+                    if not crypto.name in crypto_dict.keys() :
+                        crypto_dict[crypto.name] = crypto
             except Exception as e:
                 return list(crypto_dict.values())
             
