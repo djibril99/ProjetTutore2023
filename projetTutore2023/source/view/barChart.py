@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import streamlit as st
-
+import numpy as np
 class BarChart:
     def __init__(self, liste_data):
-        self.liste_cripto  = liste_data
+        self.liste_crypto  = liste_data
         
     def _plot_crypto_variation(self, crypto):
         fig, ax = plt.subplots(figsize=(8, 6))
@@ -38,7 +38,7 @@ class BarChart:
             return
 
         # Chercher la crypto-monnaie sélectionnée dans la liste de données
-        selected_crypto_data = [crypto for crypto in self.liste_cripto if crypto.name in selected_crypto_name]
+        selected_crypto_data = [crypto for crypto in self.liste_crypto if crypto.name in selected_crypto_name]
         #style pour le texte
         st.markdown(f'''<style>
                         .cle {{
@@ -98,4 +98,32 @@ class BarChart:
             st.markdown("""
                         <hr style="height:1.5px;border-width:0;color:black;background-color:black">
                         """, unsafe_allow_html=True)
+    def afficher_courbe_comparative(self):
+            # Données à afficher
+            cryptos = [crypto.name for crypto in self.liste_crypto]
+            variations_1h = [crypto.percent_change_1h for crypto in self.liste_crypto]
+            variations_24h = [crypto.percent_change_24h for crypto in self.liste_crypto]
+            variations_7j = [crypto.percent_change_7d for crypto in self.liste_crypto]
+
+            # Créer l'axe x pour les catégories et définir la largeur des barres
+            x = np.arange(len(cryptos))
+            width = 0.2
+
+            # Créer le diagramme en barres groupées pour chaque période
+            fig, ax = plt.subplots()
+            rects1 = ax.bar(x - width, variations_1h, width, label='1 heure')
+            rects2 = ax.bar(x, variations_24h, width, label='24 heures')
+            rects3 = ax.bar(x + width, variations_7j, width, label='7 jours')
+
+            # Ajouter des étiquettes et une légende
+            ax.set_xlabel('Cryptomonnaies')
+            ax.set_ylabel('Variations')
+            ax.set_title('Comparaison des variations des cryptomonnaies par période')
+            ax.set_xticks(x)
+            ax.set_xticklabels(cryptos)
+            ax.legend()
+
+            # Afficher le diagramme
+            plt.close()
+            st.pyplot(fig)
 

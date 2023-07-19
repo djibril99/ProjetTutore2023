@@ -1,19 +1,15 @@
 import streamlit as st
-<<<<<<< HEAD
 from source.model.DataReader import DataReader
 from source.view.barChart import BarChart
-=======
-from model.DataReader import DataReader
-from view.barChart import BarChart
+from source.model.DataReader import DataReader
 import base64
->>>>>>> db668c95ea106de84dc41c4ea3e47930e9f04ddb
 
 # Ajouter un titre à l'application
 def get_img_as_base64(file):
         with open(file, "rb") as f:
                 data = f. read ( )
         return base64.b64encode (data) . decode ()
-img = get_img_as_base64 ("art3.jpeg")
+img = get_img_as_base64 ("projetTutore2023\\source\\art3.jpeg")
 
 st.markdown(f'''
     <style>
@@ -101,3 +97,8 @@ else:
         if bnt_click:
                 barChart =  BarChart(liste_data)
                 barChart.afficher_crypto_info(selected_crypto)
+        """
+        else :
+              barChart =  BarChart(liste_data)
+              barChart.afficher_courbe_comparative()
+        """
