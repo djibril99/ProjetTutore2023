@@ -99,31 +99,35 @@ class BarChart:
                         <hr style="height:1.5px;border-width:0;color:black;background-color:black">
                         """, unsafe_allow_html=True)
     def afficher_courbe_comparative(self):
-            # Données à afficher
-            cryptos = [crypto.name for crypto in self.liste_crypto]
-            variations_1h = [crypto.percent_change_1h for crypto in self.liste_crypto]
-            variations_24h = [crypto.percent_change_24h for crypto in self.liste_crypto]
-            variations_7j = [crypto.percent_change_7d for crypto in self.liste_crypto]
+        # Données à afficher
+        cryptos = [crypto.name for crypto in self.liste_crypto]
+        variations_1h = [crypto.percent_change_1h for crypto in self.liste_crypto]
+        variations_24h = [crypto.percent_change_24h for crypto in self.liste_crypto]
+        variations_7j = [crypto.percent_change_7d for crypto in self.liste_crypto]
 
-            # Créer l'axe x pour les catégories et définir la largeur des barres
-            x = np.arange(len(cryptos))
-            width = 0.2
+        # Créer l'axe x pour les catégories et définir la largeur des barres
+        x = np.arange(len(cryptos))
+        width = 0.2
 
-            # Créer le diagramme en barres groupées pour chaque période
-            fig, ax = plt.subplots()
-            rects1 = ax.bar(x - width, variations_1h, width, label='1 heure')
-            rects2 = ax.bar(x, variations_24h, width, label='24 heures')
-            rects3 = ax.bar(x + width, variations_7j, width, label='7 jours')
+        # Créer le diagramme en barres groupées pour chaque période
+        fig, ax = plt.subplots()
+        ax.bar(x - width, variations_1h, width, label='1 heure')
+        ax.bar(x, variations_24h, width, label='24 heures')
+        ax.bar(x + width, variations_7j, width, label='7 jours')
 
-            # Ajouter des étiquettes et une légende
-            ax.set_xlabel('Cryptomonnaies')
-            ax.set_ylabel('Variations')
-            ax.set_title('Comparaison des variations des cryptomonnaies par période')
-            ax.set_xticks(x)
-            ax.set_xticklabels(cryptos)
-            ax.legend()
+        # Ajouter des étiquettes et une légende
+        ax.set_xlabel('Cryptomonnaies')
+        ax.set_ylabel('Variations')
+        ax.set_title('Comparaison des variations des cryptomonnaies par période')
 
-            # Afficher le diagramme
-            plt.close()
-            st.pyplot(fig)
+        # Incliner les étiquettes des crypto-monnaies de 45 degrés
+        ax.set_xticks(x)
+        ax.set_xticklabels(cryptos, rotation=50, ha='right')
+
+        ax.legend()
+
+        # Afficher le diagramme
+        plt.close()
+        st.pyplot(fig)
+
 

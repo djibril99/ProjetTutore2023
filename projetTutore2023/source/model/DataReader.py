@@ -12,7 +12,7 @@ class DataReader:
         self._API_KEY = 'ded5b890-0e71-41e4-b097-a3e73ec43f99'
         self.parameters = {
             'start': '1',
-            'limit': '5',
+            'limit': '10',
             'convert': 'USD',
         }
         self.headers = {
