@@ -69,40 +69,38 @@ st.markdown(f'''
     </div> 
 ''', unsafe_allow_html=True)
 
-# Récupérer les données depuis le lien
+# Récupérer les données depuis le lien et definir la limite de cryptomonnaies à afficher
 data_reader = DataReader(st.slider('Nombre de cryptomonnaies à afficher', 1, 100, 10))
-liste_data = data_reader.get_data()
-print(data_reader.limit)
+liste_data = data_reader.get_data()            
 
-# Afficher un message d'erreur si les données n'ont pas été récupérées
-            
-
+# Vérifier si les données sont bien récupérées
 if len(liste_data) == 0:
         st.error('Error while loading data')
         st.stop()
 else:
         # Affiche le message  au-dessus du select
         st.subheader('Veuillez choisir une crypto-monnaie')
-
-        # changer la limite des cryptos à afficher
         
         # Créer une liste déroulante pour sélectionner la crypto-monnaie de notre choix 
         crypto_names = [crypto.name for crypto in liste_data]
         selected_crypto= st.multiselect('Sélectionner au moins une crypto-monnaie', crypto_names)
-        
+
+        # Créer deux colonnes pour afficher les boutons
         col1 , col2 = st.columns(2)
         with col1 :
-                # Afficher le bouton "Valider"
+                # bouton pour afficher la variation des cryptomonnaies
                 bnt_click = st.button(
                         label='Afficher la variation des cryptomonnaies')
         with col2 :
-                # Afficher le bouton "Comparer"
-                bnt_click2 = st.button(
+                # bouton pour afficher la comparaison des cryptomonnaies
+                bnt2_click = st.button(
                         label='Comparer le prix des cryptomonnaies')
         if bnt_click:
+                # Créer un objet BarChart et afficher la variation des cryptomonnaies
                 barChart =  BarChart(liste_data)
                 barChart.afficher_crypto_info(selected_crypto)
-        elif bnt_click2:
+        elif bnt2_click:
+                # Créer un objet BarChart et afficher la comparaison des cryptomonnaies
                 barChart =  BarChart(liste_data)
                 barChart.afficher_courbe_comparative(selected_crypto)
 
