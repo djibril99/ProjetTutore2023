@@ -28,7 +28,7 @@ class DataReader:
 
             try:
                 response = session.get(self._url, params=self.parameters)
-                print(response.text)
+                # print(response.text)
                 data = json.loads(response.text)
                 for crypto_json in data['data']:
                     crypto = CryptoModel()

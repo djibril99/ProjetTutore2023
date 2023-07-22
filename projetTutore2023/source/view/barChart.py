@@ -45,39 +45,31 @@ class BarChart:
                             font-weight: bold;
                             font-size: 20px;
                             font-family: "Times New Roman", Times, serif;
-                            color:#000000;
+                            color:#ffffff;
                         }}
                         .valeur {{
                             font-size: 20px;
-                            font-family: "Times New Roman", Times, serif;
-                            font-style: italic;
-                            color: #00a800;
+                            font-family: Gill Sans, Monaco;
+                            # font-style: italic;
+                            color: #00ff00;
                             }}
                         </style>
                         ''', unsafe_allow_html=True)
 
         # Utiliser la classe BarChart pour afficher le graphique de variation de la crypto sélectionnée
         for crypto_data in selected_crypto_data:
-            # Afficher les informations de la crypto sélectionnée
-            """
-            st.write('Nom :', crypto_data.name)
-            st.write('Prix :', crypto_data.price)
-            st.write('Rang CMC :', crypto_data.cmc_rank)
-            st.write('Nombre de paires de marché :', crypto_data.num_market_pairs)
-            st.write('Volume 24h :', crypto_data.volume_24h)
-            """
             #affichage avec html/css
             st.markdown(f'''
-                        <div style="elevation:16px; box-shadow: 0 0 7px; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: #ffffff;">
-                            <div style="background-color: rgb(234, 244, 250 ) ; border-radius: 2px; padding: 10px;">
+                        <div style="elevation:16px; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: #333333;">
+                            <div style="background-color: rgb(51, 51, 51 ) ; border-radius: 2px; padding: 10px;">
                                 <center>
-                                <h3 style="font-family: 'Times New Roman', Times, serif; color: #21618C;">
-                                <img src="https://coinicons-api.vercel.app/api/icon/{crypto_data.symbol.lower()}" alt="{crypto_data.name}" width="33" height="33">
+                                <h3 style="font-family: 'Times New Roman', Times, serif; color: #ffffff;">
+                                <img src="https://coinicons-api.vercel.app/api/icon/{crypto_data.symbol.lower()}" alt="{crypto_data.name}" width="34" height="34">
                                 {crypto_data.name}
                                 </h3>
                                 </center>
                             </div>
-                            <p> <span class="cle">Prix :</span> <span class="valeur">{round(crypto_data.price,2)} USD</span> </p>
+                            <p> <span class="cle">Prix :</span> <span class="valeur">{round(crypto_data.price,2)}$ (USD)</span> </p>
                             <p> <span class="cle">Rang CMC :</span> <span class="valeur">{crypto_data.cmc_rank}</span></p>
                             <p> <span class="cle">Nombre de paires de marché :</span> <span class="valeur">{crypto_data.num_market_pairs}</span></p>
                             <p> <span class="cle">Volume 24h :</span> <span class="valeur">{crypto_data.volume_24h}</span></p>
