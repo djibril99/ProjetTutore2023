@@ -91,6 +91,13 @@ else:
         with col3 :
                 # Afficher le bouton "Valider"
                 bnt_click = st.button('Valider')
+        with col4 :
+                # Afficher le bouton "Comparer"
+                bnt_click2 = st.button('Comparer')
         if bnt_click:
                 barChart =  BarChart(liste_data)
                 barChart.afficher_crypto_info(selected_crypto)
+        elif bnt_click2:
+                barChart =  BarChart(liste_data)
+                barChart.afficher_courbe_comparative(selected_crypto)
+

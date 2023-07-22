@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import streamlit as st
 import numpy as np
+import random
 class BarChart:
     def __init__(self, liste_data):
         self.liste_crypto  = liste_data
@@ -15,8 +16,9 @@ class BarChart:
         ax.set_xlabel('Temps', fontsize=12, fontweight='bold', color='#ffffff')
         ax.set_ylabel('Variations de la crypto-monnaie', fontsize=12, fontweight='bold', color='#ffffff')
         ax.set_title(f'Variations de la crypto-monnaie {crypto.name}', fontsize=14, fontweight='bold', color='#ffffff')
-        ax.spines['bottom'].set_color('#ffffff')
-        ax.spines['left'].set_color('#ffffff')
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['left'].set_visible(False)
         ax.tick_params(colors='#ffffff')
         ax.set_facecolor('#333333')
         fig.patch.set_facecolor('#333333')
@@ -90,36 +92,68 @@ class BarChart:
             st.markdown("""
                         <hr style="height:1.5px;border-width:0;color:black;background-color:black">
                         """, unsafe_allow_html=True)
-    def afficher_courbe_comparative(self):
-        # Données à afficher
-        cryptos = [crypto.name for crypto in self.liste_crypto]
-        variations_1h = [crypto.percent_change_1h for crypto in self.liste_crypto]
-        variations_24h = [crypto.percent_change_24h for crypto in self.liste_crypto]
-        variations_7j = [crypto.percent_change_7d for crypto in self.liste_crypto]
+
+
+
+
+
+    def afficher_courbe_comparative(self, selected_crypto):
+        if not selected_crypto:
+            cryptos = [crypto for crypto in self.liste_crypto]
+            variations_1h = [crypto.price for crypto in cryptos]
+        else:
+            # Données à afficher
+            cryptos = [crypto for crypto in self.liste_crypto if crypto.name in selected_crypto]
+            variations_1h = [crypto.price for crypto in cryptos]
 
         # Créer l'axe x pour les catégories et définir la largeur des barres
-        x = np.arange(len(cryptos))
-        width = 0.2
+        x = np.arange(cryptos.__len__())
+        width = 0.4
 
         # Créer le diagramme en barres groupées pour chaque période
         fig, ax = plt.subplots()
-        ax.bar(x - width, variations_1h, width, label='1 heure')
-        ax.bar(x, variations_24h, width, label='24 heures')
-        ax.bar(x + width, variations_7j, width, label='7 jours')
+        
+        # Generate a random color for each bar
+        colors = [self.generate_bright_random_color() for _ in range(len(cryptos))]
+        bars = ax.bar(x - width/2, variations_1h, width, color=colors, edgecolor='white')
 
         # Ajouter des étiquettes et une légende
-        ax.set_xlabel('Cryptomonnaies')
-        ax.set_ylabel('Variations')
-        ax.set_title('Comparaison des variations des cryptomonnaies par période')
+        ax.set_xlabel('Cryptomonnaies', fontsize=12, color='#ffffff')
+        ax.set_ylabel('Variations prix', fontsize=12, color='#ffffff')
+        ax.set_title('Comparaison entre les prix des cryptomonnaies', color='#ffffff')
 
         # Incliner les étiquettes des crypto-monnaies de 45 degrés
         ax.set_xticks(x)
-        ax.set_xticklabels(cryptos, rotation=50, ha='right')
+        ax.set_xticklabels((crypto.name for crypto in cryptos), rotation=45, ha='right', fontsize=10, color='#ffffff')
 
-        ax.legend()
+        # Styling for the bars
+        for i, bar in enumerate(bars):
+            height = bar.get_height()
+            ax.annotate(f'{height:.2f}', 
+                        xy=(bar.get_x() + bar.get_width() / 2, height),
+                        xytext=(0, 3),  # 3 points vertical offset
+                        textcoords="offset points",
+                        ha='center', va='bottom', fontsize=13, color=bar.get_facecolor())
 
-        # Afficher le diagramme
-        plt.close()
+        # Hide the spines (the lines surrounding the plot)
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.spines['left'].set_visible(False)
+        ax.set_facecolor('#333333')
+        fig.patch.set_facecolor('#333333')
+
+        # Hide ticks
+        ax.tick_params(axis='both', length=0, colors='white')
+
+        # Show the plot
+        plt.xticks(fontsize=10, fontweight='bold', color='white')
+        plt.yticks(fontsize=10, fontweight='bold', color='white')
+        plt.tight_layout()
         st.pyplot(fig)
 
-
+    def generate_bright_random_color(self):
+        # Generate random RGB values with higher intensity levels
+        r = random.randint(100, 255)
+        g = random.randint(100, 255)
+        b = random.randint(100, 255)
+        return f'#{r:02x}{g:02x}{b:02x}'
