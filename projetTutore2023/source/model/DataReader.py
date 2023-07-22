@@ -7,12 +7,14 @@ from requests_cache import CachedSession
 
 # IF BUGS INSTALL THIS : pip install requests-cache
 class DataReader:
-    def __init__(self):
+    limit = 10
+    def __init__(self,limit):
         self._url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
         self._API_KEY = 'ded5b890-0e71-41e4-b097-a3e73ec43f99'
+        self.limit = limit
         self.parameters = {
             'start': '1',
-            'limit': '10',
+            'limit': self.limit,
             'convert': 'USD',
         }
         self.headers = {
@@ -33,7 +35,7 @@ class DataReader:
                 for crypto_json in data['data']:
                     crypto = CryptoModel()
                     crypto.load(crypto_json)
-                    if not crypto.name in crypto_dict.keys() :
+                    if crypto.name not in crypto_dict.keys() :
                         crypto_dict[crypto.name] = crypto
             except Exception as e:
                 return []

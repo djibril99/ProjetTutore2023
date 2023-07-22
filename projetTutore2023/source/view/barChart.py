@@ -100,22 +100,22 @@ class BarChart:
     def afficher_courbe_comparative(self, selected_crypto):
         if not selected_crypto:
             cryptos = [crypto for crypto in self.liste_crypto]
-            variations_1h = [crypto.price for crypto in cryptos]
+            price_variation = [crypto.price for crypto in cryptos]
         else:
             # Données à afficher
             cryptos = [crypto for crypto in self.liste_crypto if crypto.name in selected_crypto]
-            variations_1h = [crypto.price for crypto in cryptos]
+            price_variation = [crypto.price for crypto in cryptos]
 
         # Créer l'axe x pour les catégories et définir la largeur des barres
         x = np.arange(cryptos.__len__())
         width = 0.4
 
         # Créer le diagramme en barres groupées pour chaque période
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(cryptos.__len__()+9, (cryptos.__len__()/4)+8))    
         
         # Generate a random color for each bar
         colors = [self.generate_bright_random_color() for _ in range(len(cryptos))]
-        bars = ax.bar(x - width/2, variations_1h, width, color=colors, edgecolor='white')
+        bars = ax.bar(x - width/2, price_variation, width, color=colors, edgecolor='white')
 
         # Ajouter des étiquettes et une légende
         ax.set_xlabel('Cryptomonnaies', fontsize=12, color='#ffffff')

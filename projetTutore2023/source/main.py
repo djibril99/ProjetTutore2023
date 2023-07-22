@@ -70,8 +70,9 @@ st.markdown(f'''
 ''', unsafe_allow_html=True)
 
 # Récupérer les données depuis le lien
-data_reader = DataReader()
+data_reader = DataReader(st.slider('Nombre de cryptomonnaies à afficher', 1, 100, 10))
 liste_data = data_reader.get_data()
+print(data_reader.limit)
 
 # Afficher un message d'erreur si les données n'ont pas été récupérées
             
@@ -83,17 +84,21 @@ else:
         # Affiche le message  au-dessus du select
         st.subheader('Veuillez choisir une crypto-monnaie')
 
+        # changer la limite des cryptos à afficher
+        
         # Créer une liste déroulante pour sélectionner la crypto-monnaie de notre choix 
         crypto_names = [crypto.name for crypto in liste_data]
         selected_crypto= st.multiselect('Sélectionner au moins une crypto-monnaie', crypto_names)
         
-        col1 , col2, col3, col4, col5 = st.columns(5)
-        with col3 :
+        col1 , col2 = st.columns(2)
+        with col1 :
                 # Afficher le bouton "Valider"
-                bnt_click = st.button('Valider')
-        with col4 :
+                bnt_click = st.button(
+                        label='Afficher la variation des cryptomonnaies')
+        with col2 :
                 # Afficher le bouton "Comparer"
-                bnt_click2 = st.button('Comparer')
+                bnt_click2 = st.button(
+                        label='Comparer le prix des cryptomonnaies')
         if bnt_click:
                 barChart =  BarChart(liste_data)
                 barChart.afficher_crypto_info(selected_crypto)
