@@ -13,8 +13,6 @@ class CryptoModel:
                 self.percent_change_1h = 0
                 self.percent_change_24h = 0
                 self.percent_change_7d = 0
-                
-                
       
         def load(self, data):
                 #hydrater l'objet avec les donnees recuperees depuis l'api

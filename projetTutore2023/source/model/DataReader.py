@@ -25,10 +25,8 @@ class DataReader:
         with CachedSession(cache_name='crypto_cache', backend='sqlite', expire_after=self.cache_expire_after) as session:
             session.headers.update(self.headers)
             crypto_dict = {}
-
             try:
                 response = session.get(self._url, params=self.parameters)
-                print(response.text)
                 data = json.loads(response.text)
                 for crypto_json in data['data']:
                     crypto = CryptoModel()

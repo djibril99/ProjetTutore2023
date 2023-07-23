@@ -59,13 +59,6 @@ class BarChart:
         # Utiliser la classe BarChart pour afficher le graphique de variation de la crypto sélectionnée
         for crypto_data in selected_crypto_data:
             # Afficher les informations de la crypto sélectionnée
-            """
-            st.write('Nom :', crypto_data.name)
-            st.write('Prix :', crypto_data.price)
-            st.write('Rang CMC :', crypto_data.cmc_rank)
-            st.write('Nombre de paires de marché :', crypto_data.num_market_pairs)
-            st.write('Volume 24h :', crypto_data.volume_24h)
-            """
             #affichage avec html/css
             st.markdown(f'''
                         <div style="elevation:16px; box-shadow: 0 0 7px; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: #ffffff;">
