@@ -107,13 +107,13 @@ class BarChart:
             
     # Méthode pour afficher le graphique de comparaison des cryptomonnaies sélectionnées
     def afficher_courbe_comparative(self, selected_crypto):
-        if (not selected_crypto )or ( not len(selected_crypto) > 1): #verifier si l'utilisateur a selectionne au moins une crypto
-            cryptos = [crypto for crypto in self.liste_crypto]
+        if (not selected_crypto ): #verifier si l'utilisateur a selectionne au moins une crypto
+            cryptos = [crypto for crypto in self.liste_crypto[:10]]
             price_variation = [crypto.price for crypto in cryptos]
         else:
             # Données à afficher
             cryptos = [
-                crypto for crypto in self.liste_crypto if crypto.name in selected_crypto]
+                crypto for crypto in self.liste_crypto[:10] if crypto.name in selected_crypto]
             price_variation = [crypto.price for crypto in cryptos]
 
         # Créer l'axe x pour les catégories et définir la largeur des barres
