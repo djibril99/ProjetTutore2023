@@ -27,6 +27,7 @@ class CryptoModel:
                         
         
         #utiliser la recursivité pour charger les donnees de l'objet
+        #verifier si la valeur est un dictionnaire et si oui appeler la fonction load pour charger les donnees de ce dictionnaire
         def _charge(self,key , value):
                 #verifier si c est un dict
                 if isinstance(value, dict):
@@ -37,9 +38,10 @@ class CryptoModel:
                                 setattr(self,key,value)
                                 
         
+        
         #methode de classe pour convertir les donnees en format json pour pouvoir les afficher dans un dataframe correctement
         @classmethod
-        def data_array_to_json(cls, tableau_donnee:list):
+        def data_array_to_json( crypt_list:list):
                 data_json = {}
                 #recuperer les attritus de la classe CryptoModel et les ajouter dans le dictionnaire comme des cles 
                 listeKeys = [key for key in CryptoModel().__dict__]
@@ -49,57 +51,9 @@ class CryptoModel:
                         data_json[key] = []
                         
                 #ajouter les donnees de chaque colonne du tableau 
-                for crypto_data in tableau_donnee:
-                        dict_crypto = crypto_data.__dict__
+                for crypto in crypt_list:
+                        dict_crypto = crypto.__dict__
                         for key in listeKeys:
                                 data_json[key].append(dict_crypto[key])
                 
                 return data_json
-        
-                """
-                 {
-            "id": 1,
-            "name": "Bitcoin",
-            "symbol": "BTC",
-            "slug": "bitcoin",
-            "cmc_rank": 5,
-            "num_market_pairs": 500,
-            "circulating_supply": 16950100,
-            "total_supply": 16950100,
-            "max_supply": 21000000,
-            "infinite_supply": false,
-            "last_updated": "2018-06-02T22:51:28.209Z",
-            "date_added": "2013-04-28T00:00:00.000Z",
-            "tags": [
-                "mineable"
-            ],
-            "platform": null,
-            "self_reported_circulating_supply": null,
-            "self_reported_market_cap": null,
-            "quote": {
-                "USD": {
-                    "price": 9283.92,
-                    "volume_24h": 7155680000,
-                    "volume_change_24h": -0.152774,
-                    "percent_change_1h": -0.152774,
-                    "percent_change_24h": 0.518894,
-                    "percent_change_7d": 0.986573,
-                    "market_cap": 852164659250.2758,
-                    "market_cap_dominance": 51,
-                    "fully_diluted_market_cap": 952835089431.14,
-                    "last_updated": "2018-08-09T22:53:32.000Z"
-                },
-                "BTC": {
-                    "price": 1,
-                    "volume_24h": 772012,
-                    "volume_change_24h": 0,
-                    "percent_change_1h": 0,
-                    "percent_change_24h": 0,
-                    "percent_change_7d": 0,
-                    "market_cap": 17024600,
-                    "market_cap_dominance": 12,
-                    "fully_diluted_market_cap": 952835089431.14,
-                    "last_updated": "2018-08-09T22:53:32.000Z"
-                }
-                """
-        
